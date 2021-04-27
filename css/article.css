@@ -1,0 +1,21 @@
+#article_content .title {
+	font-size: 25px;
+}
+#article_content .author {
+	font-size: 15px;
+}
+#article_content .media-type,
+#article_content .date {
+	font-size: 12px;
+}
+#article_content .content {
+	margin-top: 10px;
+}
+#article_content .content .article-image {
+	width: 35%;
+	float: right;
+	margin: 0 0 25px 25px;
+}
+#article_content .content span {
+	white-space: pre-line;
+}

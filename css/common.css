@@ -1,0 +1,74 @@
+body {
+	margin: 0;
+	background-color: #3d3d3d;
+}
+#header_content {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 50px;
+	background-color: rgba(36, 36, 36, 0.9);
+	z-index: 999;
+}
+#header_content .head-logo {
+	width: 25%;
+	height: 30px;
+	line-height: 30px;
+    padding: 10px;
+    font-size: 30px;
+	display: inline-block;
+	text-decoration: none;
+	color: white;
+}
+#header_content .head-menu {
+	width: 60%;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+    padding: 10px;
+	font-size: 20px;
+	float: right;
+}
+#header_content .head-menu a {
+	width: 30%;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+#header_content .head-menu a:hover {
+	color: #910000;
+}
+.body-content {
+	min-height: calc(100vh - 100px);
+	padding-bottom: 30px;
+}
+.padded-body {
+	padding: 0 100px;
+}
+.body-content .main-content {
+	margin-top: 80px;
+	margin-bottom: 30px;
+	display: inline-block;
+	width: 100%;
+	color: #fff;
+}
+.body-content > h1 {
+	padding-top: 80px;
+	color: white;
+}
+.body-content > p {
+	white-space: pre-line;
+	color: white;
+}
+#footer_content {
+	height: 75px;
+	width: 100%;
+	background-color: black;
+	color: white;
+	text-align: center;
+	padding-top: 25px;
+    box-sizing: border-box;
+	margin-top: 25px;
+}
