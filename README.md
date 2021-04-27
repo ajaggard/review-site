@@ -1,2 +1,2 @@
-# review_site
+# review-site
  A sample review site created in XAMPP.
