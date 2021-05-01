@@ -35,6 +35,17 @@
 	}
 	else {
 		$article = $results->fetch_assoc();
+        
+        // Get comments for article
+        $stmt = $conn->prepare("
+            SELECT id, reply_to_id, author, content,
+                DATE_FORMAT(date, '%Y-%m-%d') AS date, date AS datetime
+            FROM `comments`
+            WHERE article_id = ?
+        ");
+        $stmt->bind_param("i", $article_id);
+        $stmt->execute();
+        $comments = $stmt->get_result();
 		
 		$page_title = $article["title"];
 		$page_ident = "article";
@@ -50,10 +61,20 @@
 		<div class="content">
 			<img alt="Media Logo" src="../images/<?php echo $article["image_link"] ?>" class="article-image">
 			<span><?php echo $article["content"] ?></span>
-			<?php
-				#TODO: Add comment system 
-			?>
 		</div>
+        <h3>Comments</h3>
+        <div class="comment-container">
+            <?php
+                if ( $comments->num_rows > 0 ) {
+                    // TODO: Display comments
+                }
+                else {
+            ?>
+                    <span>No comments</span>
+            <?php
+                }
+            ?>
+        </div>
 	</div>
 </div>
 <?php 
