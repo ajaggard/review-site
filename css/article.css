@@ -10,6 +10,7 @@
 }
 #article_content .content {
 	margin-top: 10px;
+    margin-bottom: 50px;
 }
 #article_content .content .article-image {
 	width: 35%;
@@ -18,4 +19,39 @@
 }
 #article_content .content span {
 	white-space: pre-line;
+}
+
+form textarea,
+form input {
+    display: block;
+    margin-bottom: 10px;
+}
+form textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+}
+form input:not([type="submit"]) {
+    width: 50%;
+}
+
+.comment-container {
+    width: 50%;
+}
+.comment-container .comment {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.comment-container .comment .comment-user {
+    width: 25%;
+    margin-right: 2%;
+    display: inline-block;
+    border-right: 1px solid #fff;
+}
+.comment-container .comment .comment-content {
+    width: 70%;
+    display: inline-block;
+}
+#comment_form {
+    margin-top: 40px;
 }

@@ -1,13 +1,13 @@
 <?php	
 	// Connect to db
 	$conn = new mysqli('localhost', 'root', '', 'review_site');
-	if ($conn->connect_error) {
+	if ( $conn->connect_error ) {
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
 	// Validate the id from the params
 	$article_id;
-	if(isset($_GET['aid']) && is_numeric($_GET['aid']) && intval($_GET['aid']) > 0){
+	if( isset($_GET['aid']) && is_numeric($_GET['aid']) && intval($_GET['aid']) > 0 ) {
 		$article_id = intval($_GET["aid"]);
 	}
 	else {
@@ -16,6 +16,27 @@
 		header("location:error.php");
 		exit();
 	}
+    
+    // Get comment data and put it in the database if it exists
+    $comment_name;
+    $comment_email;
+    $comment_content;
+    if( isset($_POST['author']) && isset($_POST['email']) && isset($_POST['content']) ) {
+        $comment_author = $_POST['author'];
+        $comment_email = $_POST['email'];
+        $comment_content = $_POST['content'];
+        
+        $stmt = $conn->prepare("
+            INSERT INTO `comments` (
+                article_id,
+                author,
+                email,
+                content
+            ) VALUES (?, ?, ?, ?)
+        ");
+        $stmt->bind_param("isss", $article_id, $comment_author, $comment_email, $comment_content);
+        $stmt->execute();
+    }
 	
 	// Get current article
 	$stmt = $conn->prepare("
@@ -38,10 +59,10 @@
         
         // Get comments for article
         $stmt = $conn->prepare("
-            SELECT id, reply_to_id, author, content,
-                DATE_FORMAT(date, '%Y-%m-%d') AS date, date AS datetime
+            SELECT id, reply_to_id, author, content, date
             FROM `comments`
             WHERE article_id = ?
+            ORDER BY date DESC
         ");
         $stmt->bind_param("i", $article_id);
         $stmt->execute();
@@ -66,7 +87,15 @@
         <div class="comment-container">
             <?php
                 if ( $comments->num_rows > 0 ) {
-                    // TODO: Display comments
+                    // Display comments
+                    while ( $row = $comments->fetch_assoc() ) {
+            ?>
+                        <div class="comment">
+                            <div class="comment-user" title="Posted on <?php echo $row['date'] ?>"><?php echo $row['author'] ?></div>
+                            <div class="comment-content"><?php echo $row['content'] ?></div>
+                        </div>
+            <?php
+                    }
                 }
                 else {
             ?>
@@ -74,6 +103,13 @@
             <?php
                 }
             ?>
+            <form id="comment_form" action="../html/article.php?aid=<?php echo $article_id ?>" method="post">
+                <h4>Leave a Comment?</h4>
+                <textarea name="content" placeholder="Comment"></textarea>
+                <input type="text" name="author" placeholder="Name*">
+                <input type="text" name="email" placeholder="Email*">
+                <input type="submit" class="submit-button" value="Post">
+            </form>
         </div>
 	</div>
 </div>

@@ -17,12 +17,6 @@
 .search-bar .submit-button {
 	width: 8%;
 	margin-left: 2%;
-	cursor: pointer;
-	background-color: #910000;
-	color: white;
-}
-.search-bar .submit-button:hover {
-	background-color: #ab0000;
 }
 
 .search-results .notice {

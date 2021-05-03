@@ -72,3 +72,18 @@ body {
     box-sizing: border-box;
 	margin-top: 25px;
 }
+
+form input {
+    display: inline-block;
+	box-sizing: border-box;
+	padding: 10px;
+	border: none;
+}
+form .submit-button {
+	cursor: pointer;
+	background-color: #910000;
+	color: white;
+}
+form .submit-button:hover {
+	background-color: #ab0000;
+}
